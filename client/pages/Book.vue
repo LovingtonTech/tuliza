@@ -6,23 +6,15 @@
 			</h2>
 			<form @submit.prevent="" class="space-y-3" action="">
 				<div class="input-field">
-					<label class="" for="first_name">First Name</label
+					<label class="" for="first_name">Username</label
 					><input
 						type="text"
-						v-model="appointment.firstname"
-						placeholder="First Name"
+						v-model="appointment.username"
+						placeholder="Username"
 						required
 					/>
 				</div>
-				<div class="input-field">
-					<label for="last_name">Last Name</label
-					><input
-						type="text"
-						v-model="appointment.lasstname"
-						placeholder="Last name"
-						required
-					/>
-				</div>
+
 				<div class="input-field">
 					<label for="phone">Phone</label
 					><input
@@ -32,15 +24,7 @@
 						required
 					/>
 				</div>
-				<div class="input-field">
-					<label for="email">Email</label
-					><input
-						type="email"
-						v-model="appointment.email"
-						placeholder="Email"
-						required
-					/>
-				</div>
+
 				<div class="input-field">
 					<label for="date">Date of Appointment</label
 					><input
@@ -58,14 +42,13 @@
 	</div>
 </template>
 <script>
+import axios from "axios";
 export default {
 	data() {
 		return {
 			appointment: {
-				firstname: "",
-				lasname: "",
+				username: "",
 				phone: "",
-				email: "",
 				date: "",
 			},
 		};
@@ -74,6 +57,29 @@ export default {
 		bookAppointment() {
 			console.log(this.appointment);
 			console.log("inserted");
+			//var axios = require("axios");
+			var data = JSON.stringify({
+				username: "name",
+				phone: "phone",
+				date: "date",
+			});
+
+			const config = {
+				method: "post",
+				url: "localhost:3030/api/appointments",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				data: data,
+			};
+
+			axios(config)
+				.then(function (response) {
+					console.log(JSON.stringify(response.data));
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
 		},
 	},
 };

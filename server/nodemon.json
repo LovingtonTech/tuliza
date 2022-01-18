@@ -1,5 +1,6 @@
 {
 	"env":{
-		"MONGO_ATLAS_PASSWORD":"tuliza"
+		"MONGO_ATLAS_DB":"mongodb+srv://tuliza:tuliza@lovington.9j9xo.mongodb.net/tulizadb?retryWrites=true&w=majority",
+		"MONGO_DEV_DB":"mongodb://tuliza:tuliza@localhost:27017/tulizadb"
 	}
 }

@@ -24,7 +24,7 @@ export default {
   plugins: [],
 
   //Configure Middleware
-  serverMiddleware: ["~/server/app"],
+  //serverMiddleware: ["~/server/app"],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
