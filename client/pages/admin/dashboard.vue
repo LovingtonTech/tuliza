@@ -28,7 +28,7 @@
 <script>
 import TulizaService from "../../services/TulizaService";
 export default {
-	mounted() {
+	created() {
 		TulizaService.getAppointments().then((results) => {
 			this.appointments = results.data;
 			console.log(results);
