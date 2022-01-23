@@ -2,10 +2,13 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const mongoose = require("mongoose");
-mongoose.connect(
-  process.env.MONGO_DEV_DB,
-  { useNewUrlParser: true }
-);
+
+//Databases
+const MONGO_ATLAS_DB =
+  "mongodb+srv://tuliza:tuliza@lovington.9j9xo.mongodb.net/tulizadb?retryWrites=true&w=majority";
+const MONGO_DEV_DB = "mongodb://tuliza:tuliza@localhost:27017/tulizadb";
+
+mongoose.connect(MONGO_DEV_DB, { useNewUrlParser: true });
 
 //Define API routes
 const servicesRoute = require("./api/routes/services");
@@ -36,10 +39,10 @@ app.use((req, res, next) => {
 });
 
 //use API routes
-app.use("/api/services", servicesRoute);
-app.use("/api/hairstyles", hairstylesRoute);
-app.use("/api/users", usersRoute);
-app.use("/api/appointments", appointmentsRoute);
+app.use("/services", servicesRoute);
+app.use("/hairstyles", hairstylesRoute);
+app.use("/users", usersRoute);
+app.use("/appointments", appointmentsRoute);
 
 //Handle errors
 app.use((req, res, next) => {
@@ -54,5 +57,5 @@ app.use((error, req, res, next) => {
   });
 });
 
-module.exports = app;
-//module.exports = { path: "api/", handler: app };
+//module.exports = app;
+module.exports = { path: "api/", handler: app };

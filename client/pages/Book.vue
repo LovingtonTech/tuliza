@@ -4,96 +4,82 @@
 			<h2 class="text-xl font-bold mb-4 text-gray-600">
 				Book your appointment
 			</h2>
-			<form @submit.prevent="" class="space-y-3" action="">
-				<div class="input-field">
-					<label class="" for="first_name">Username</label
-					><input
-						type="text"
-						v-model="appointment.username"
-						placeholder="Username"
-						required
-					/>
-				</div>
-
-				<div class="input-field">
-					<label for="phone">Phone</label
-					><input
-						type="tel"
-						v-model="appointment.phone"
-						placeholder="Phone Number"
-						required
-					/>
-				</div>
-
-				<div class="input-field">
-					<label for="date">Date of Appointment</label
-					><input
-						type="date"
-						v-model="appointment.date"
-						placeholder="Date and time"
-						required
-					/>
-				</div>
-				<div class="input-field">
-					<button @click="bookAppointment" type="submit">Book</button>
-				</div>
+			<form @submit.prevent="" class="space-y-3">
+				<label class="input-label" for="first_name">Username</label
+				><input
+					class="input-field"
+					type="text"
+					v-model="appointment.username"
+					placeholder="Username"
+					required
+				/>
+				<label class="input-label" for="phone">Phone</label
+				><input
+					class="input-field"
+					type="tel"
+					v-model="appointment.phone"
+					placeholder="Phone Number"
+					required
+				/>
+				<label class="input-label" for="phone">Service</label
+				><input
+					class="input-field"
+					type="text"
+					v-model="appointment.service"
+					placeholder="Service"
+					required
+				/>
+				<label class="input-label" for="date">Date of Appointment</label
+				><input
+					class="input-field"
+					type="date"
+					v-model="appointment.date"
+					placeholder="Date and time"
+					required
+				/>
+				<button class="input-button" @click="bookAppointment" type="submit">
+					Book
+				</button>
 			</form>
 		</div>
 	</div>
 </template>
 <script>
-import axios from "axios";
+import TulizaService from "../services/TulizaService";
 export default {
 	data() {
 		return {
 			appointment: {
 				username: "",
 				phone: "",
+				service: [],
 				date: "",
 			},
 		};
 	},
 	methods: {
-		bookAppointment() {
-			console.log(this.appointment);
-			console.log("inserted");
-			//var axios = require("axios");
-			var data = JSON.stringify({
-				username: "name",
-				phone: "phone",
-				date: "date",
-			});
-
-			const config = {
-				method: "post",
-				url: "localhost:3030/api/appointments",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				data: data,
-			};
-
-			axios(config)
-				.then(function (response) {
-					console.log(JSON.stringify(response.data));
+		async bookAppointment() {
+			await TulizaService.postAppointment(this.appointment)
+				.then((response) => {
+					alert(response);
 				})
-				.catch(function (error) {
-					console.log(error);
+				.catch((err) => {
+					alert(err);
 				});
 		},
 	},
 };
 </script>
 <style scoped>
-.input-field label {
+.input-label {
 	@apply block mb-1 text-gray-500 font-bold;
 }
-.input-field input {
+.input-field {
 	@apply w-full border-2 border-gray-400 p-2 rounded outline-none;
 	@apply focus:border-blue-700;
 	@apply transition duration-300;
 }
-.input-field button {
+.input-button {
 	@apply w-full bg-yellow-400 p-4 rounded-lg text-purple-900;
 	@apply hover:bg-yellow-500;
 	@apply transition duration-300;

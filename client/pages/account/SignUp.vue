@@ -70,7 +70,7 @@ export default {
 	},
 	methods: {
 		async addUser() {
-			await axios.post("");
+			await axios.post("http://localhost:3000/api/user", this.user);
 			console.log(this.user);
 		},
 	},

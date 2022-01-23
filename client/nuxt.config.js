@@ -24,7 +24,7 @@ export default {
   plugins: [],
 
   //Configure Middleware
-  //serverMiddleware: ["~/server/app"],
+  serverMiddleware: ["../server/app"],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -44,7 +44,7 @@ export default {
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: ["@nuxtjs/axios"],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
